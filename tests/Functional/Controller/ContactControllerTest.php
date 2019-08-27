@@ -70,6 +70,15 @@ final class ContactControllerTest extends WebTestCase
         ];
     }
 
+    public function testContactFormRendersWithFormGroups(): void
+    {
+        $crawler = $this->browser->request('GET', ContactPage::URI);
+
+        self::assertResponseIsSuccessful('Contact page renders successful');
+        self::assertCount(4, $crawler->filter('form[name='.ContactPage::FORM_PREFIX.'] .form-group'), 'Bootstrap form-group classes are present');
+        self::assertCount(1, $crawler->filter('form[name='.ContactPage::FORM_PREFIX.'] .btn'), 'Bootstrap button is present');
+    }
+
     private function assertMailSent(int $count): void
     {
         $profile = $this->browser->getProfile();
