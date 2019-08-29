@@ -76,4 +76,55 @@ class CategoryControllerTest extends WebTestCase
         static::assertCount(1, $crawler->filter('.alert-success'), 'Success message found');
         static::assertContains('Food', $crawler->filter('#categories li')->last()->text());
     }
+
+    /**
+     * @depends testEditCategoryWithoutParentScenario
+     */
+    public function testCreateCategoryWithParentScenario(): void
+    {
+        static::$browser->request('GET', CategoryPage::URI);
+        static::$browser->submitForm(CategoryPage::FORM_SUBMIT, CategoryPage::FORM_DATA_VALID_WITH_PARENT);
+
+        $crawler = static::$browser->followRedirect();
+
+        static::assertCount(1, $crawler->filter('.alert-success'), 'Success message found');
+        static::assertRegExp('@Food\s*»\s*Vegetable@', $crawler->filter('#categories li')->last()->text());
+    }
+
+    /**
+     * @depends testCreateCategoryWithParentScenario
+     */
+    public function testCategoryRemoveParentScenario(): void
+    {
+        static::$browser->request('GET', DashboardPage::URI);
+        static::$browser->clickLink('Vegetable');
+        static::$browser->submitForm(CategoryPage::FORM_SUBMIT, [
+            'category[name]' => 'Vegetable',
+            'category[parent]' => '',
+        ]);
+
+        $crawler = static::$browser->followRedirect();
+
+        static::assertCount(1, $crawler->filter('.alert-success'), 'Success message found');
+        static::assertContains('Vegetable', $crawler->filter('#categories li')->last()->text());
+        static::assertNotContains('Food', $crawler->filter('#categories li')->last()->text());
+    }
+
+    /**
+     * @depends testCreateCategoryWithParentScenario
+     */
+    public function testCategoryEditParentScenario(): void
+    {
+        static::$browser->request('GET', DashboardPage::URI);
+        static::$browser->clickLink('Vegetable');
+        static::$browser->submitForm(CategoryPage::FORM_SUBMIT, [
+            'category[name]' => 'Vegetable',
+            'category[parent]' => 1,
+        ]);
+
+        $crawler = static::$browser->followRedirect();
+
+        static::assertCount(1, $crawler->filter('.alert-success'), 'Success message found');
+        static::assertRegExp('@Food\s*»\s*Vegetable@', $crawler->filter('#categories li')->last()->text());
+    }
 }

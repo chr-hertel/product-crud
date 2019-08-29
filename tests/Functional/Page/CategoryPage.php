@@ -17,4 +17,9 @@ class CategoryPage
     public const FORM_DATA_VALID_WITHOUT_PARENT_TOO_SHORT_NAME = [
         'category[name]' => 'Fo',
     ];
+
+    public const FORM_DATA_VALID_WITH_PARENT = [
+        'category[name]' => 'Vegetable',
+        'category[parent]' => 1,
+    ];
 }
