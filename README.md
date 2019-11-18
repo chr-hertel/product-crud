@@ -1,6 +1,6 @@
 # Symfony Forms in Detail
 
-Repository contains example application used for "Symfony Forms in Detail" at [SymfonyLive Berlin 2019](https://berlin2019.live.symfony.com/)
+Repository contains example application used for "Practical Forms with Symfony" at [SymfonyCon Amsterdam 2019](https://amsterdam2019.symfony.com/)
 
 ## Requirements
 
