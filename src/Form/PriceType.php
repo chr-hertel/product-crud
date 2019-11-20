@@ -84,10 +84,14 @@ class PriceType extends AbstractType implements DataMapperInterface
 
         $forms = iterator_to_array($forms);
 
-        $data = new Price(
-            (int) $forms['amount']->getData(),
-            $forms['tax']->getData(),
-            $forms['currency']->getData()
-        );
+        try {
+            $data = new Price(
+                (int) $forms['amount']->getData(),
+                $forms['tax']->getData(),
+                $forms['currency']->getData()
+            );
+        } catch (PriceException $exception) {
+            $forms[$exception->getProperty()]->addError(new FormError($exception->getMessage()));
+        }
     }
 }
