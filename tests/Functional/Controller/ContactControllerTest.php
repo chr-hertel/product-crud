@@ -38,6 +38,34 @@ class ContactControllerTest extends WebTestCase
         static::assertCount(1, $crawler->filter('.alert-success'), 'Success message found');
     }
 
+    /**
+     * @dataProvider provideInvalidFormData
+     */
+    public function testFailureContactScenario(array $formData, int $violationCount): void
+    {
+        $this->browser->request('GET', ContactPage::URI);
+
+        static::assertResponseIsSuccessful('Contact page renders successful');
+
+        $this->browser->enableProfiler();
+        $crawler = $this->browser->submitForm(ContactPage::FORM_SUBMIT, $formData);
+
+        $this->assertMailSent(0);
+        $this->assertValidationViolation($violationCount);
+
+        static::assertCount(0, $crawler->filter('.alert-success'), 'Success message not found');
+    }
+
+    public function provideInvalidFormData(): array
+    {
+        return [
+            [ContactPage::FORM_DATA_EMPTY, 4],
+            [ContactPage::FORM_DATA_MISSING_EMAIL, 1],
+            [ContactPage::FORM_DATA_INVALID_EMAIL, 1],
+            [ContactPage::FORM_DATA_TOO_SHORT, 3],
+        ];
+    }
+
     private function assertMailSent(int $count): void
     {
         $profile = $this->browser->getProfile();
