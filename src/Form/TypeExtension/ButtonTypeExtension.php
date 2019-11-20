@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ButtonTypeExtension extends AbstractTypeExtension
+class ButtonTypeExtension /*extends AbstractTypeExtension*/
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

@@ -27,9 +27,4 @@ class ContactType extends AbstractType
         $resolver->setDefault('data_class', Dto::class);
         $resolver->setDefault('help', 'Please provide enough information');
     }
-
-    public function getBlockPrefix()
-    {
-        return 'contact_us';
-    }
 }
