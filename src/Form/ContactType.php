@@ -17,7 +17,7 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, ['help' => 'Provide an address you really check'])
             ->add('subject')
             ->add('message', TextareaType::class);
     }
@@ -25,5 +25,11 @@ class ContactType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault('data_class', Dto::class);
+        $resolver->setDefault('help', 'Please provide enough information');
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'contact_us';
     }
 }

@@ -1,15 +1,28 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form _self %}
+
 {% block title 'Contact Us' %}
+
+{% block _contact_us_help %}
+    <div class="alert alert-info">
+        {{ block('form_help') }}
+    </div>
+{% endblock %}
 
 {% block content %}
     <h1>Contact Us</h1>
     <p>Please let us know what you think</p>
 
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': true}}) }}
+
         {{ form_errors(form) }}
         {{ form_help(form) }}
-        {{ form_rest(form) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.message) }}
 
         <button type="submit" class="btn btn-primary">Submit</button>
     {{ form_end(form) }}
