@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Entity\Category;
-use App\Entity\Exception\PriceException;
 use App\Entity\Exception\ProductException;
 use App\Entity\Product;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
-use Symfony\Component\Form\Exception;
+use Symfony\Component\Form\Event\PreSetDataEvent;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -41,6 +41,18 @@ class ProductType extends AbstractType implements DataMapperInterface
 
         $this->baseDataMapper = $builder->getDataMapper();
         $builder->setDataMapper($this);
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'removeSkuOnEdit']);
+    }
+
+    public function removeSkuOnEdit(PreSetDataEvent $event): void
+    {
+        $data = $event->getData();
+        $form = $event->getForm();
+
+        if ($data instanceof Product) {
+            $form->remove('sku');
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
