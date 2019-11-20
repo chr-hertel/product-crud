@@ -18,7 +18,7 @@ class ContactController extends AbstractController
      */
     public function contact(Request $request, Mailer $mailer): Response
     {
-        $form = $this->createForm(ContactType::class);
+        $form = $this->createForm(ContactType::class, null, ['client_validation' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
