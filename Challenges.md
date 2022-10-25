@@ -7,7 +7,7 @@ Repository: https://github.com/chr-hertel/product-crud
 
 * merge branch `contact/01-base`
     ```bash
-    $ git merge contact/01-base
+    git merge origin/contact/01-base
     ```
 * implement `App\Contact\Dto`
     * see `App\Contact\Mailer` for help
@@ -19,28 +19,28 @@ Repository: https://github.com/chr-hertel/product-crud
 
 See documentation for help:
 * https://symfony.com/doc/current/forms.html#usage
-* https://symfony.com/doc/current/best_practices/forms.html
+* https://symfony.com/doc/current/best_practices.html#forms
 
 ### Additional challenges
 
 * Form Validation
     ```bash
-    $ git merge contact/02-validation
+    git merge origin/contact/02-validation
     ```
 * Form Layout
     ```bash
-    $ git merge contact/03-layout
+    git merge origin/contact/03-layout
     ```
 
 ## Challenge 2 - Category Form
 
 * merge branch `category/01-base`
     ```bash
-    $ git merge category/01-base
+    git merge origin/category/01-base
     ```
 * update Doctrine schema
     ```bash
-    $ bin/console doctrine:schema:update --force
+    bin/console doctrine:schema:update --force
     ```
 * implement `App\Form\CategoryType` using `DataMapper` and `empty_data`
 * catch CategoryException and add `FormError` instances
@@ -52,21 +52,21 @@ See documentation for help:
 
 * optional parent relation
     ```bash
-    $ git merge category/02-parent
+    git merge origin/category/02-parent
     ```
     https://symfony.com/doc/current/reference/forms/types/entity.html
 
 * filter parent categories to filter out itself
-* use category path as choice label, eg. Food » Vegetable
+* use category path as choice label, e.g. Food » Vegetable
 
 ## Challenge 3 - Product Form
 
 * merge branch `product/01-base`
     ```bash
-    $ git merge product/01-base
+    git merge origin/product/01-base
     ```
 * implement `App\Form\SkuType` using `DataTransformer` and `TextType` as parent
-* implement `App\Form\Product` for `App\Entity\Product` using `DataMapper`
+* implement `App\Form\ProductType` for `App\Entity\Product` using `DataMapper`
 
 See documentation for help:
 * https://symfony.com/doc/current/form/data_transformers.html
@@ -74,7 +74,7 @@ See documentation for help:
 
 ### Additional challenges
 
-* change view of `sku` to read-only when sku is already set
+* don't show field `sku` for existing products 
     ```bash
-    $ git merge product/02-view
+    git merge origin/product/02-view
     ```

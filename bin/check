@@ -16,8 +16,5 @@ vendor/bin/phpstan analyse
 # code style
 vendor/bin/php-cs-fixer fix --dry-run
 
-# security check
-vendor/bin/security-checker security:check
-
 # tests
 bin/phpunit

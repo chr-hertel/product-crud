@@ -28,8 +28,6 @@ jobs:
                   command: validate
             - name: Code Style
               run: vendor/bin/php-cs-fixer fix --dry-run
-            - name: Security Check
-              run: vendor/bin/security-checker security:check
             - name: Tests
               run: bin/phpunit
             - name: Static Code Analysis

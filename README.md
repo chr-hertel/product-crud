@@ -1,20 +1,20 @@
 # Symfony Forms in Detail
 
-Repository contains example application used for "Practical Forms with Symfony" at [SymfonyCon Amsterdam 2019](https://amsterdam2019.symfony.com/)
+Repository contains example application used for "Practical Forms with Symfony" at [SymfonyCon Disneyland Paris 2022](https://live.symfony.com/2022-paris-con/)
 
 ## Requirements
 
-* PHP >= 7.1.3
-* [Doctrine compatible](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/introduction.html#introduction) database layer, eg. SQLite
+* PHP >= 8.1
+* [Doctrine compatible](https://www.doctrine-project.org/projects/doctrine-dbal/en/3.4/reference/introduction.html#introduction) database layer, eg. SQLite
 
 ## Setting up
 
 **Checkout & Build** 
 
 ```bash
-$ git clone git@github.com:chr-hertel/product-crud.git
-$ cd product-crud
-$ composer install
+git clone git@github.com:chr-hertel/product-crud.git
+cd product-crud
+composer install
 ```
 
 **Webserver**
@@ -22,16 +22,16 @@ $ composer install
 Configure your vhost root to point to `public/` or use  
 
 ```bash
-$ bin/console server:start
+symfony serve --daemon
 ```
 
-and open homepage (eg http://localhost:8000)
+and open homepage (eg https://localhost:8000)
 
 ## Database
 
 ```bash
-$ bin/console doctrine:database:create
-$ bin/console doctrine:schema:create --force
+bin/console doctrine:database:create
+bin/console doctrine:schema:create
 ```
 
 ## Quality Checks
@@ -39,7 +39,7 @@ $ bin/console doctrine:schema:create --force
 You can execute the configured quality checks by running
 
 ```bash
-$ bin/check
+bin/check
 ```
 
 It will execute:
@@ -49,5 +49,4 @@ It will execute:
 * Composer Validation
 * PHPStan Static Code Analysis
 * PHP-CS-Fixer Code Style
-* Security Checker
 * PHPUnit Testing

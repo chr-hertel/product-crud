@@ -3,6 +3,9 @@ parameters:
     paths:
         - src/
         - tests/
-    autoload_files:
-        - '%currentWorkingDirectory%/bin/.phpunit/phpunit-7.5/vendor/autoload.php'
-    inferPrivatePropertyTypeFromConstructor: true
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        -
+            message: '#Property App\\Entity\\[a-zA-Z]+::\$id is never written, only read.#'
+            paths:
+                - src/Entity/*
