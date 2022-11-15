@@ -9,7 +9,7 @@ final class ContactPage
     public const URI = '/contact';
 
     public const FORM_SUBMIT = 'Submit';
-    public const FORM_PREFIX = 'contact';
+    public const FORM_PREFIX = 'contact_us';
     public const FORM_DATA_VALID = [
         self::FORM_PREFIX.'[name]' => 'Jane Doe',
         self::FORM_PREFIX.'[email]' => 'jane@example.com',
