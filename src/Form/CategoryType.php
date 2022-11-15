@@ -6,6 +6,8 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Exception\CategoryException;
+use App\Repository\CategoryRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
@@ -17,6 +19,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CategoryType extends AbstractType implements DataMapperInterface
 {
+    public function __construct(private readonly CategoryRepository $categoryRepository)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -25,6 +31,7 @@ final class CategoryType extends AbstractType implements DataMapperInterface
                 'choice_label' => 'name',
                 'required' => false,
                 'class' => Category::class,
+                'query_builder' => $this->createQueryBuilder($options['data'] ?? null),
             ]);
 
         $builder->setDataMapper($this);
@@ -90,5 +97,16 @@ final class CategoryType extends AbstractType implements DataMapperInterface
         } else {
             $viewData->removeParent();
         }
+    }
+
+    private function createQueryBuilder(?Category $category): ?QueryBuilder
+    {
+        if (null === $category) {
+            return null;
+        }
+
+        return $this->categoryRepository->createQueryBuilder('c')
+            ->where('c.id != :id')
+            ->setParameter('id', $category->getId());
     }
 }
