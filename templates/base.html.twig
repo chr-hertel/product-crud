@@ -12,7 +12,7 @@
     <body>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="">Product CRUD</a>
+                <a class="navbar-brand" href="{{ path('dashboard') }}">Product CRUD</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -20,16 +20,16 @@
                 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="">Dashboard</a>
+                            <a class="nav-link" href="{{ path('dashboard') }}">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">New Product</a>
+                            <a class="nav-link" href="{{ path('product_form') }}">New Product</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">New Category</a>
+                            <a class="nav-link" href="{{ path('category_form') }}">New Category</a>
                         </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
+                    <form class="form-inline my-2 my-lg-0" action="{{ path('search') }}">
                         <input class="form-control mr-sm-2" type="text" name="query" placeholder="Product Search" aria-label="Product Search">
                         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                     </form>
