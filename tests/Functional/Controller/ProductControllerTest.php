@@ -50,4 +50,22 @@ final class ProductControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('.alert-success'), 'Success message found');
         self::assertStringContainsString('Rocket', $crawler->filter('#products li')->last()->text());
     }
+
+    /**
+     * @depends testCreateProductScenario
+     */
+    public function testEditExistingProductWithFrozenSku(): void
+    {
+        self::$browser->request('GET', DashboardPage::URI);
+        $crawler = self::$browser->clickLink('Rocket');
+
+        self::assertCount(0, $crawler->filter('input[name="product[sku]"]'), 'SKU form field not found');
+
+        self::$browser->submitForm(ProductPage::FORM_SUBMIT, ['product[name]' => 'Salad']);
+
+        $crawler = self::$browser->followRedirect();
+
+        self::assertCount(1, $crawler->filter('.alert-success'), 'Success message found');
+        self::assertStringContainsString('Salad', $crawler->filter('#products li')->last()->text());
+    }
 }
