@@ -59,6 +59,7 @@
 {% macro delete(path, id) %}
     <form method="post" action="{{ path(path) }}" class="d-inline">
         <input type="hidden" name="id" value="{{ id }}" />
+        <input type="hidden" name="_method" value="DELETE" />
         <button class="badge badge-danger float-right border-0">X</button>
     </form>
 {% endmacro %}
